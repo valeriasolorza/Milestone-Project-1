@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        canvas {
-            border : 1px solid black;
-        }
-        body {
-            margin: 0;
-            background: pink;
-        }
-    </style>
+    
+    <title>SimonSays</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="simon-game">
+        <div id="buttons-container">
+          <div class="color-button" id="red"></div>
+          <div class="color-button" id="blue"></div>
+          <div class="color-button" id="green"></div>
+          <div class="color-button" id="yellow"></div>
+        </div>
+        <button id="start-button">Start</button>
+        <div id="score">Score: 0</div>
+      </div>
+      
     <canvas></canvas>
 <script src = "index.js"></script>
 </body>
