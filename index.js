@@ -6,14 +6,28 @@ let score = 0
 const startButton = document.querySelector('.js-start')
 const info = document.querySelector('.js-info')
 
-function levelUp() {
+const heading = document.querySelector('.js-heading')
+const buttonContainer = document.querySelector('.js-container');
+
+
+function nextRound() {
     score++;
-    console.log(score)
+    // console.log(score)
+
+    buttonContainer.classList.add('unclickable')
+    info.textContent = "Wait for Simon"
+    heading.textContent = 'Level: ' + score
+
 
     //copies all the elements in the sequence
     const nextSequence = [...sequence]
     nextSequence.push(addToSequence())
     displaySequence(nextSequence)
+
+    sequence = [...nextSequence]
+    setTimeout(() => {
+        userTurn(score)
+    }, score * 500 + 1000)
 }
 
 // Adds new color to end of Simon's Sequence 
@@ -25,7 +39,7 @@ function addToSequence() {
 }
 
 // displays Simon's Sequence
-function displaySequence(nextSequence) { //add sequence a parameter?
+function displaySequence(nextSequence) { 
     nextSequence.forEach((color, index) => {
         setTimeout(() => {
             console.log(color)
@@ -51,13 +65,43 @@ function activateButton(color) {
     }, 500);
 }
 
+function userTurn(score){
+    buttonContainer.classList.remove('unclickable')
+    info.textContent = "Your Turn! Taps Left"
+}
+
+function handleClick(button){
+    const index = userInput.push(button)-1
+    // const sound = document.querySelector(sound)
+    //sound.play()
+
+    const remainder = sequence.length - userInput.length
+
+    if (userInput.length === sequence.length){
+        userInput = []
+        info.textContent = "Success! Next Round!"
+        setTimeout(() => {
+            nextRound();
+        }, 1000)
+        return
+    }
+
+    info.textContent = "Your Turn! Taps Remaining: " + remainder;
+}
+
 function startGame() {
     startButton.classList.add('hidden')
     info.classList.remove('hidden')
     info.textContent = "Wait for Simon"
-    levelUp()
+    nextRound()
 }
 startButton.addEventListener('click', startGame)
+
+buttonContainer.addEventListener('click', event =>{
+    const { button } = event.target.dataset;
+
+    if ( button ) {handleClick(button)}
+})
 
 
 
