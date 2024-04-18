@@ -14,54 +14,58 @@ let score = 0
 function addToSequence() {
     let newColor = colors[Math.floor(Math.random() * colors.length)];
     sequence.push(newColor)
-    console.log("add sequence: ", sequence)
+    // console.log("add sequence: ", sequence)
 }
 
 
 // displays Simon's Sequence
 function displaySequence() {
-    sequence.forEach(element => {
+    sequence.forEach(color => {
         setTimeout(() => {
-            animate(element)
+            animate(color.id)
         }, 1000)
-        console.log("display " + element)
     });
-
+    console.log(sequence)
 }
 
 function animate(color) {
     //play animation and sound for chosen element
-    const button = document.getElementById(color);
-    button.classList.add('active');
-    setTimeout(() => {
-        button.classList.remove('active');
-    }, 500);
+
+    // const button = document.getElementById(color);
+    // button.classList.add();
+    // setTimeout(() => {
+    //     button.classList.remove('active');
+    // }, 500);
     //add sound
 }
 
 function getUserInput() {
     //add user click to userInput array
     let buttons = document.querySelectorAll('.color-button')
-    console.log(buttons)
+    // console.log(buttons)
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             userInput.push(button.id)
             animate(button.id)
-            checkInput()
+            // checkInput()
             console.log("event listener worked")
+            console.log(userInput)
         })
     })
+
+
 }
+
 
 //compares user input to simon's sequence
 function checkInput() {
+    console.log("userinpput array:" + userInput)
     let index = userInput.length - 1;
 
     if (userInput[index] === sequence[index]) {
         score++
         userInput = []
-        addToSequence();
-        displaySequence;
+        startGame();
         console.log("user: " + userInput[index])
         console.log("simon: " + sequence[index])
     }

@@ -11,6 +11,10 @@ body {
   cursor: pointer;
 }
 
+.active .color-button:hover {
+  background-color: whitesmoke;
+}
+
 #red {
   background-color: red;
 }
