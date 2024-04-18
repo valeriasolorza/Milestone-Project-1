@@ -39,7 +39,7 @@ function addToSequence() {
 }
 
 // displays Simon's Sequence
-function displaySequence(nextSequence) { 
+function displaySequence(nextSequence) {
     nextSequence.forEach((color, index) => {
         setTimeout(() => {
             console.log(color)
@@ -53,7 +53,7 @@ function activateButton(color) {
     // play animation and sound for chosen element
     console.log("this is what is passed into activateBUtton: " + color)
     const button = document.querySelector(`[data-button='${color}']`);
-    
+
     // const sound = document.querySelector(`[data-sound = '${color}]'`)//query selector
     // const sound = document.querySelector(color)
 
@@ -65,19 +65,37 @@ function activateButton(color) {
     }, 500);
 }
 
-function userTurn(score){
-    buttonContainer.classList.remove('unclickable')
-    info.textContent = "Your Turn! Taps Left"
+function resetGame() {
+    alert("WRONG SEQUENCE. SIMON WINS")
+    sequence = []
+    userInput = []
+    score = 0
+    startButton.classList.remove('hidden')
+    heading.textContent = "Simon Says"
+    info.classList.add('hidden')
+    buttonContainer.classList.add('unclickable')
+
+    console.log("***********************************NEW***************************************")
 }
 
-function handleClick(button){
-    const index = userInput.push(button)-1
+function userTurn(score) {
+    buttonContainer.classList.remove('unclickable')
+    info.textContent = "Your Turn!"
+}
+
+function handleClick(button) {
+    const index = userInput.push(button) - 1
     // const sound = document.querySelector(sound)
     //sound.play()
 
     const remainder = sequence.length - userInput.length
 
-    if (userInput.length === sequence.length){
+    if (userInput[index] !== sequence[index]) {
+        resetGame()
+        return;
+    }
+
+    if (userInput.length === sequence.length) {
         userInput = []
         info.textContent = "Success! Next Round!"
         setTimeout(() => {
@@ -86,7 +104,7 @@ function handleClick(button){
         return
     }
 
-    info.textContent = "Your Turn! Taps Remaining: " + remainder;
+    info.textContent = "Taps Remaining: " + remainder;
 }
 
 function startGame() {
@@ -97,10 +115,10 @@ function startGame() {
 }
 startButton.addEventListener('click', startGame)
 
-buttonContainer.addEventListener('click', event =>{
+buttonContainer.addEventListener('click', event => {
     const { button } = event.target.dataset;
 
-    if ( button ) {handleClick(button)}
+    if (button) { handleClick(button) }
 })
 
 
