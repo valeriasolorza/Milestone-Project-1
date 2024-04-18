@@ -6,43 +6,58 @@ let score = 0
 const startButton = document.querySelector('.js-start')
 const info = document.querySelector('.js-info')
 
-function startGame(){
-    startButton.classList.add('hidden')
-    info.classList.remove('hidden')
-    info.textContent = "Wait for Simon"
-}
+function levelUp() {
+    score++;
+    console.log(score)
 
-startButton.addEventListener('click', startGame)
-
-function levelUp(){
-    score ++;
-
-    //copies aall the elements in the 
+    //copies all the elements in the sequence
     const nextSequence = [...sequence]
+    nextSequence.push(addToSequence())
+    displaySequence(nextSequence)
 }
 
 // Adds new color to end of Simon's Sequence 
 function addToSequence() {
+    // const colors = ['red', 'blue', 'green', 'yellow']
     let newColor = colors[Math.floor(Math.random() * colors.length)];
-    sequence.push(newColor)
+    return newColor
     // console.log("add sequence: ", sequence)
 }
 
-
 // displays Simon's Sequence
-function displaySequence() {
-    sequence.forEach(color => {
+function displaySequence(nextSequence) { //add sequence a parameter?
+    nextSequence.forEach((color, index) => {
         setTimeout(() => {
-            animate(color.id)
-        }, 1000)
+            console.log(color)
+            activateButton(color)
+        }, (index + 1) * 600);
     });
-    console.log("display sequence function: " + sequence)
+    console.log("display sequence function: " + nextSequence)
 }
 
+function activateButton(color) {
+    // play animation and sound for chosen element
+    console.log("this is what is passed into activateBUtton: " + color)
+    const button = document.querySelector(`[data-button='${color}']`);
+    
+    // const sound = document.querySelector(`[data-sound = '${color}]'`)//query selector
+    // const sound = document.querySelector(color)
 
+    button.classList.add('activated');
+    // sound.play()
 
+    setTimeout(() => {
+        button.classList.remove('activated');
+    }, 500);
+}
 
-
+function startGame() {
+    startButton.classList.add('hidden')
+    info.classList.remove('hidden')
+    info.textContent = "Wait for Simon"
+    levelUp()
+}
+startButton.addEventListener('click', startGame)
 
 
 
@@ -101,7 +116,7 @@ function displaySequence() {
 // // const satrtButton = document.querySelector('js.start')
 // // const info = document.querySelector('js.start')
 
-// // Adds new color to end of Simon's Sequence 
+// // Adds new color to end of Simon's Sequence
 // function addToSequence() {
 //     let newColor = colors[Math.floor(Math.random() * colors.length)];
 //     sequence.push(newColor)
@@ -191,7 +206,7 @@ function displaySequence() {
 
 //     addToSequence()
 //     displaySequence()
-//     // your turn 
+//     // your turn
 //     getUserInput()
 //     //comapre
 // }
