@@ -1,16 +1,27 @@
-var canvas = document.querySelector('canvas');
-
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
-
-var c = canvas.getContext('2d');
-
-const colors = ['red', 'blue', 'yellow', 'green']
+const colors = ['red', 'blue', 'green', 'yellow']
 let sequence = []
 let userInput = []
 let score = 0
 
-// Adds new color to end of sequence 
+const startButton = document.querySelector('.js-start')
+const info = document.querySelector('.js-info')
+
+function startGame(){
+    startButton.classList.add('hidden')
+    info.classList.remove('hidden')
+    info.textContent = "Wait for Simon"
+}
+
+startButton.addEventListener('click', startGame)
+
+function levelUp(){
+    score ++;
+
+    //copies aall the elements in the 
+    const nextSequence = [...sequence]
+}
+
+// Adds new color to end of Simon's Sequence 
 function addToSequence() {
     let newColor = colors[Math.floor(Math.random() * colors.length)];
     sequence.push(newColor)
@@ -25,69 +36,182 @@ function displaySequence() {
             animate(color.id)
         }, 1000)
     });
-    console.log(sequence)
-}
-
-function animate(color) {
-    //play animation and sound for chosen element
-
-    // const button = document.getElementById(color);
-    // button.classList.add();
-    // setTimeout(() => {
-    //     button.classList.remove('active');
-    // }, 500);
-    //add sound
-}
-
-function getUserInput() {
-    //add user click to userInput array
-    let buttons = document.querySelectorAll('.color-button')
-    // console.log(buttons)
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            userInput.push(button.id)
-            animate(button.id)
-            // checkInput()
-            console.log("event listener worked")
-            console.log(userInput)
-        })
-    })
-
-
+    console.log("display sequence function: " + sequence)
 }
 
 
-//compares user input to simon's sequence
-function checkInput() {
-    console.log("userinpput array:" + userInput)
-    let index = userInput.length - 1;
 
-    if (userInput[index] === sequence[index]) {
-        score++
-        userInput = []
-        startGame();
-        console.log("user: " + userInput[index])
-        console.log("simon: " + sequence[index])
-    }
-    else {
-        alert("WRONG SEQUENCE. SIMON WINS")
-        restartGame();
-    }
-}
 
-//begin game
-function startGame() {
-    addToSequence()
-    displaySequence()
-    getUserInput()
-}
 
-function restartGame() {
-    sequence = []
-    userInput = []
-    score = 0
 
-    startGame()
-}
 
-startGame()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // const satrtButton = document.querySelector('js.start')
+// // const info = document.querySelector('js.start')
+
+// // Adds new color to end of Simon's Sequence 
+// function addToSequence() {
+//     let newColor = colors[Math.floor(Math.random() * colors.length)];
+//     sequence.push(newColor)
+//     // console.log("add sequence: ", sequence)
+// }
+
+
+// // displays Simon's Sequence
+// function displaySequence() {
+//     sequence.forEach(color => {
+//         setTimeout(() => {
+//             animate(color.id)
+//         }, 1000)
+//     });
+//     console.log("display sequence function: " + sequence)
+// }
+
+// function animate(color) {
+//     //play animation and sound for chosen element
+
+//     // const button = document.getElementById(color);
+//     // button.classList.add();
+//     // setTimeout(() => {
+//     //     button.classList.remove('active');
+//     // }, 500);
+//     //add sound**
+// }
+
+// function getUserInput() {
+//     let buttons = document.querySelectorAll('.color-button')
+//     // console.log(buttons)
+//     buttons.forEach(button => {
+//         button.addEventListener('click', () => {
+//             userInput.push(button.id)
+//             // animate(button.id)
+//             checkInput()
+//             console.log("event listener worked")
+//             console.log(userInput)
+//         })
+//     })
+//     // checkInput(index)
+
+// }
+
+// //compares user input to simon's sequence
+// function checkInput() {
+
+//     console.log("simon array: " + sequence)
+//     console.log("userinput array: " + userInput)
+
+
+//     let userCorrect;
+
+//     for (let i = 0; i < userInput.length; i++) {
+
+//         console.log("user: " + userInput[i])
+//         console.log("simon: " + sequence[i])
+
+//         if (userInput[i] !== sequence[i]) {
+//             userCorrect = false;
+//             break; // Exit the loop early if there's a mismatch
+//         }
+
+//         // if user input.length = sequence length
+//         //continuegame
+//         if (userCorrect && userInput.length == sequence.length) {
+//             console.log("game continued")
+//             score++
+//             continueGame();
+//         }
+//         else if (userCorrect) {
+//             getUserInput()
+//         }
+//         else {
+//             alert("WRONG SEQUENCE. SIMON WINS")
+//             console.log("game restarted")
+//             restartGame();
+//         }
+//     }
+// }
+
+// //begin game
+// function startGame() {
+//     // startButton.classList.add('hidden')
+//     // info.classList('hidden')
+//     // info.textContent = "Wait for the Simon"
+
+//     addToSequence()
+//     displaySequence()
+//     // your turn 
+//     getUserInput()
+//     //comapre
+// }
+
+// function continueGame() {
+//     score += 1;
+
+//     const nextSequence = [...sequence]
+//     nextSequence.push(addToSequence)
+// }
+
+// function restartGame() {
+//     sequence = []
+//     userInput = []
+//     score = 0
+
+//     console.log("***********************************NEW***************************************")
+//     startGame()
+// }
+
+// startGame()
+
+// // startButton.addEventListener('click', startGame);
