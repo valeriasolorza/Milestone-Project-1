@@ -65,8 +65,8 @@ function activateButton(color) {
     }, 500);
 }
 
-function resetGame() {
-    alert("WRONG SEQUENCE. SIMON WINS")
+function resetGame(TEXT) {
+    alert(TEXT)
     sequence = []
     userInput = []
     score = 0
@@ -91,11 +91,16 @@ function handleClick(button) {
     const remainder = sequence.length - userInput.length
 
     if (userInput[index] !== sequence[index]) {
-        resetGame()
+        resetGame('WRONG SEQUENCE. SIMON WINS')
         return;
     }
 
     if (userInput.length === sequence.length) {
+        if(userInput.length === 3){
+            resetGame('YOU WIN!')
+            return;
+        }
+
         userInput = []
         info.textContent = "Success! Next Round!"
         setTimeout(() => {
