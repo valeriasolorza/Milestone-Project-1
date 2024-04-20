@@ -96,7 +96,7 @@ function handleClick(button) {
     }
 
     if (userInput.length === sequence.length) {
-        if(userInput.length === 3){
+        if(userInput.length === 5){
             resetGame('YOU WIN!')
             return;
         }
